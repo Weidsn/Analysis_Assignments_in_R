@@ -1,2 +1,2 @@
-# data_predictive_analysis
-This is a repository.
+# Data 420 - Predictive Analysis Repository
+This repository consists of code for the Predictive Analysis course at SAIT. 
