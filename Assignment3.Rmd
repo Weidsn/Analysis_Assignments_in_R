@@ -1,0 +1,188 @@
+---
+title: "Assignment3"
+output: html_document
+date: "2023-10-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Assignment 3 - Using SQL in R
+
+### Assignment Questions
+
+##### For this assignment, I will answer the following two questions using charts and plots:
+
+1.  Which geographic regions generate the most sales?
+2.  What are the most profitable products?
+
+Below are the steps. 
+
+### Installing packages
+
+`library(tidyverse)`
+
+`library(RODBC)`
+
+```{r include=FALSE}
+library(sqldf)
+library(tidyverse)
+library(RODBC)
+```
+
+### Establishing Connection to SQL database: AdventureWorks2022
+
+```{r}
+db_conn <- odbcConnect("myDatabase", rows_at_time =1)
+```
+
+### Defining the SQL Query
+
+To calculate the profit of a product, I assumed that Profit = SalesRevenue - AcquisitionCost
+
+SalesRevenue is assumed to be UnitPrice in Sales.SalesOrderDetail. 
+
+AcquisitionCost is assumed to be the StandardCost in Production.Product. However, some products seem to be purchased from external producers. Their purchasing price can be different from their StandardCost. I used StandardCost for every product in my calculation. 
+
+Sales are aggravated from 2011 to 2014. 
+
+```{r}
+queryProductionTable <- "
+-- Use AdventureWorks2022
+Select sd.ProductID
+	,pp.[Name] as ProductName
+	,LineTotal as SalesAmt
+	-- Revenue: group_by(ProductID), sumarize LineTotal
+	,pp.StandardCost as ProductCost  
+	-- Cost: summarize StandardCost by Mean, not Sum
+	,Territory
+	,OrderDate as SalesYear
+	,TotalSalesQty as SalesQty
+	,TotalStocked as ProductStocked
+	,TotalOrdered as ProductOrdered
+from
+(SELECT ProductID
+	,[Group] as Territory
+	,YEAR(soh.OrderDate) as OrderDate
+	,SUM(sod.OrderQty) as TotalSalesQty
+	,SUM(sod.LineTotal) as LineTotal
+  FROM (
+	  Sales.SalesOrderDetail as sod
+	  left join 
+	  Sales.SalesOrderHeader as soh
+	  on sod.SalesOrderID = soh.SalesOrderID
+	  left join
+	  Sales.SalesTerritory as st
+	  on st.TerritoryID = soh.TerritoryID
+	  )
+  group by ProductID, OrderDate, [Group]
+  ) sd 
+
+ left join
+
+  (SELECT ProductID
+	,sum(stockedqty) as TotalStocked
+	,sum(orderqty) as TotalOrdered
+	,sum(ScrappedQty) as TotalScrapped
+  FROM Production.WorkOrder
+  group by ProductID
+  -- order by ProductID
+  ) p
+  on sd.ProductID = p.ProductID
+  
+  left join
+
+  Production.Product as pp
+  on pp.ProductID = sd.ProductID
+"
+```
+
+### Executing the SQL Query
+
+```{r}
+productionTable <- sqlQuery(db_conn, queryProductionTable,
+                            stringsAsFactors=FALSE)
+```
+
+### Plotting in Rstudio
+
+```{r}
+productionTable |> 
+  group_by(Territory) |> 
+  summarize(totalSalePerc = sum(SalesAmt)/sum(productionTable$SalesAmt)) |> 
+  # Rerrange Territories in a particular order so that Pacific comes first.
+  mutate(Territory = 
+           factor(Territory, 
+                  levels = c("Pacific", "Europe", "North America"))) |> 
+  
+  # Preparing perc labels for pie chart. Input: 0.722 Output: 72%. 
+  mutate(totalSalePercLabel = scales:: percent(round(totalSalePerc,2))) |> 
+  
+  ggplot(aes(x="", y=totalSalePerc, fill = Territory)) +
+  geom_col() + 
+  # pie chart command
+  coord_polar(theta = "y") +
+  
+  # colouring the pie chart
+  scale_fill_manual(values = c("grey","orange","navy")) +
+  
+  labs(title = "TOTAL REGIONAL SALES") +
+  geom_text(aes(label = totalSalePercLabel),
+            color = "white",
+            size = 5,
+            # must have for pie chart
+            position = position_stack(vjust=0.5)) + 
+  geom_text(aes(label = Territory
+                # adjust position of in-chart labels
+                ,vjust=-1
+                ,hjust=0.6),
+            color = "white",
+            size = 5,
+            position = position_stack(vjust=0.5)) +
+  
+  # Cleaning up the backgrounds
+  theme(axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        title = element_text(size = 15), 
+        
+        # centering the title
+        plot.title = element_text(hjust=0.5),
+        
+        # Remove legend
+        legend.position = "none",
+        
+        # legend.text = element_text(size=13),
+        panel.background = element_rect(fill = "white"))
+
+testFill <- c("TotalProfit", "Totalsales")
+
+productionTable |> 
+  group_by(ProductName) |> 
+  summarize(TotalSales = sum(SalesAmt),
+            TotalProfit = 
+              sum(SalesAmt) - (mean(ProductCost) * sum(SalesQty)))|> 
+  arrange(desc(TotalProfit))|> 
+  head(10) |> 
+  ggplot(aes(x=ProductName, y= TotalProfit, TotalSales)) +
+  geom_col(fill="navy", width = 0.5) +
+  coord_flip() +
+  
+  # display large numbers properly.
+  scale_y_continuous(labels=scales::comma) +
+  
+  labs(title="Most Profitable Products", y = "Total Profit", x="") +
+  theme(axis.title.x = element_text(size=13),
+        title = element_text(size = 15), 
+        
+        # centering the title
+        plot.title = element_text(hjust=0.5),
+        
+        panel.background = element_rect(fill = "white"))
+```
+
+### Closing the connection to SQL Server
+```{r}
+odbcClose(db_conn)
+```
