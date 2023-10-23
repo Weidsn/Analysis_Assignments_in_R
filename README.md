@@ -8,4 +8,4 @@ This repository consists of code for the Predictive Analysis course at [SAIT](ht
 Data analysis on [titanic.csv](https://github.com/Weidsn/data_predictive_analysis/blob/main/titanic.csv) and visualization in R.
 
 [Assignment 3](https://github.com/Weidsn/data_predictive_analysis/blob/main/Assignment3.Rmd)
-Connection to SQL server and visualization in Rstudio. Complied as MarkDown file. 
+Connection to SQL server, analysis and visualization in Rstudio. Complied as MarkDown file. 
