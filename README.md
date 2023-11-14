@@ -9,5 +9,5 @@ Data analysis on [titanic.csv](https://github.com/Weidsn/data_predictive_analysi
 [Assignment 3](https://github.com/Weidsn/data_predictive_analysis/blob/main/Assignment3.Rmd)
 Connection to SQL server, analysis and visualization in Rstudio. Complied as MarkDown file. 
 
-## Artificial Neural Network with Python
+## Unit X - Artificial Neural Network
 My Feedforward Neural Network [Presentation](https://github.com/Weidsn/data_predictive_analysis/blob/main/FNN.ipynb)
