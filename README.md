@@ -12,4 +12,4 @@ Connection to SQL server, analysis and visualization in Rstudio. Complied as Mar
 
 ## Artificial Neural Network
 
-My Feedforward Neural Network [Presentation]()
+My Feedforward Neural Network [Presentation](https://github.com/Weidsn/data_predictive_analysis/blob/main/FNN.ipynb)
