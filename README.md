@@ -16,19 +16,11 @@ Connection to SQL server, analysis and visualization in Rstudio. Complied as Mar
 ### Assignment 4
 [Assignment 4](https://github.com/Weidsn/R_predictive_analysis/blob/main/Assignment4.R)
 
-[Assignment 4 Q1 HTML]
-
-[Assignment 4 Q2 HTML]
-
 ### Assignment 5
 [Assignment 5](https://github.com/Weidsn/R_predictive_analysis/blob/main/Assignment5.R)
 
-[Assignment 5 HTML](https://github.com/Weidsn/R_predictive_analysis/blob/main/Assignment5.html)
-
 ### Assignment 6
 [Assignment 6]()
-
-[Assignment 6 HTML]()
 
 
 
