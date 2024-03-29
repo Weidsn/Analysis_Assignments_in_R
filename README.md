@@ -9,20 +9,24 @@ This repository consists of code for multiple courses including Predictive Analy
 [Assignment 2](https://github.com/Weidsn/data_predictive_analysis/blob/main/Assignment2.R)
 Data analysis on [titanic.csv](https://github.com/Weidsn/data_predictive_analysis/blob/main/titanic.csv) and visualization in R.
 
+### Assigment 3
 [Assignment 3](https://github.com/Weidsn/data_predictive_analysis/blob/main/Assignment3.Rmd)
 Connection to SQL server, analysis and visualization in Rstudio. Complied as MarkDown file. 
 
-[Assignment 4]
+### Assignment 4
+[Assignment 4](https://github.com/Weidsn/R_predictive_analysis/blob/main/Assignment4.R)
+[Assignment 4 Q1 HTML](https://github.com/Weidsn/R_predictive_analysis/blob/main/Assignment4Q1.html)
+[Assignment 4 Q2 HTML](https://github.com/Weidsn/R_predictive_analysis/blob/main/Assignment4Q2.html)
 
-[Assignment 4]
+### Assignment 5
+[Assignment 5](https://github.com/Weidsn/R_predictive_analysis/blob/main/Assignment5.R)
+[Assignment 5 HTML](https://github.com/Weidsn/R_predictive_analysis/blob/main/Assignment5.html)
 
-[Assignment 4]
+### Assignment 6
+[Assignment 6]()
+[Assignment 6 HTML]()
 
-[Assignment 4]
 
-[Assignment 4]
-
-[Assignment 4]
 
 # Artificial Neural Network
 My Feedforward Neural Network [Presentation](https://github.com/Weidsn/data_predictive_analysis/blob/main/FNN.ipynb)
