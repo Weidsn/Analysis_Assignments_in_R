@@ -1,6 +1,6 @@
 # Predictive Analysis Repository
 This repository consists of code for multiple courses including Predictive Analysis at [SAIT](https://www.sait.ca/). 
-## Unit 1 - Introduction to R
+## Introduction to R
 
 ### Assignment 1
 [Assignment 1](https://github.com/Weidsn/data_predictive_analysis/blob/main/Assignment1.R)
