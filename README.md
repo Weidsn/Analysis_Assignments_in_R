@@ -20,9 +20,9 @@ Connection to SQL server, analysis and visualization in Rstudio. Complied as Mar
 [Assignment 5](https://github.com/Weidsn/R_predictive_analysis/blob/main/Assignment5.R)
 
 ### Assignment 6
-[Assignment 6]()
+[Assignment 6](https://github.com/Weidsn/R_predictive_analysis/blob/main/Assignment6.R)
 
 
 
 # Artificial Neural Network
-My Feedforward Neural Network [Presentation](https://github.com/Weidsn/data_predictive_analysis/blob/main/FNN.ipynb)
+Quick Feedforward Neural Network Presentation [Presentation](https://github.com/Weidsn/data_predictive_analysis/blob/main/FNN.ipynb)
