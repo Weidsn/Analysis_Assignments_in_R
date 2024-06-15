@@ -25,4 +25,4 @@ Connection to SQL server, analysis and visualization in Rstudio. Complied as Mar
 
 
 # Artificial Neural Network
-Quick Feedforward Neural Network Presentation [Presentation](https://github.com/Weidsn/data_predictive_analysis/blob/main/FNN.ipynb)
+Quick Feedforward Neural Network [Presentation](https://github.com/Weidsn/data_predictive_analysis/blob/main/FNN.ipynb)
